@@ -1,0 +1,11 @@
+--index-url http://172.21.97.105 --trusted-host 172.21.97.105 --extra-index-url https://pypi.python.org/simple
+
+fastapi==0.120.3
+gunicorn==23.0.0
+uvicorn-worker==0.4.0
+SQLAlchemy==2.0.44
+alembic==1.17.1
+psycopg[binary,pool]==3.2.12
+UnleashClient==6.3.0
+
+mo-monitoring==1.2.0

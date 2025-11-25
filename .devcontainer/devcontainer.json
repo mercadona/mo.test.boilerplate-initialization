@@ -1,0 +1,124 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "jabberwocky",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerComposeFile": [
+		"../docker/docker-compose.yml",
+		"./docker-compose.yml"
+	],
+	"service": "app",
+	"workspaceFolder": "/app",
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"username": "devcontainer",
+			"configureZshAsDefaultShell": true
+			"installOhMyZsh": false,
+			"upgradePackages": false
+		},
+		"eu.gcr.io/prod-mercadona/devcontainer-features/ca-certificate:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Run commands after the container is created.
+	"onCreateCommand": "bash .devcontainer/scripts/on-create-command.sh",
+	"postCreateCommand": "bash .devcontainer/scripts/post-create-command.sh",
+
+	// Set or override environment variables.
+	"containerEnv": {
+		"PROMETHEUS_MULTIPROC_DIR": "/tmp"
+	},
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"charliermarsh.ruff"
+			],
+			"settings": {
+				"terminal.integrated.cwd": "src",
+				"python.defaultInterpreterPath": "/usr/local/bin/python",
+				"python.createEnvironment.trigger": "off",
+				"python.languageServer": "Pylance",
+				"python.analysis.autoImportCompletions": true,
+				"python.analysis.indexing": true,
+				"python.analysis.packageIndexDepths": [
+					{
+						"name": "django",
+						"depth": 10,
+						"includeAllSymbols": true
+					},
+					{
+						"name": "rest_framework",
+						"depth": 10,
+						"includeAllSymbols": true
+					},
+					{
+						"name": "fastapi",
+						"depth": 10,
+						"includeAllSymbols": true
+					},
+					{
+						"name": "startlette",
+						"depth": 10,
+						"includeAllSymbols": true
+					}
+				],
+				"python.analysis.exclude": [
+					"**/migrations"
+				],
+				"python.analysis.typeCheckingMode": "basic",
+				"python.linting.enabled": false,
+				"ruff.configuration": "src/pyproject.toml",
+				"ruff.importStrategy": "fromEnvironment",
+				"ruff.organizeImports": true,
+				"ruff.fixAll": true,
+				"python.testing.autoTestDiscoverOnSaveEnabled": false,
+				"python.testing.cwd": "./src",
+				"python.testing.pytestArgs": [],
+				"python.testing.unittestEnabled": false,
+				"python.testing.pytestEnabled": true,
+				"[python]": {
+					"editor.rulers": [
+						119
+					],
+					"editor.defaultFormatter": "charliermarsh.ruff",
+					"editor.formatOnSaveMode": "file",
+					"editor.formatOnSave": true,
+					"editor.formatOnType": false,
+					"editor.formatOnPaste": false,
+					"editor.codeActionsOnSave": {
+						"source.fixAll": "explicit",
+						"source.organizeImports": "explicit"
+					}
+				},
+				"files.exclude": {
+					"**/.pytest_cache": true,
+					"**/.mypy_cache": true,
+					"**/.ruff_cache": true,
+					"**/__pycache__": true,
+					"**/.venv": true
+				},
+				"search.exclude": {
+					"**/migrations": true
+				},
+				"files.associations": {
+					"**/requirements/*.{in,txt}": "pip-requirements"
+				}
+			}
+		}
+	},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	"remoteUser": "devcontainer",
+	"updateRemoteUserUID": true,
+
+	// Action to take when the VS Code window is closed. The default is to stop the containers.
+	"shutdownAction": "stopCompose"
+}

@@ -1,0 +1,61 @@
+[project]
+name = "jabberwocky"
+dynamic = ["version"]
+requires-python = ">=3.13"
+
+[tool.ruff]
+line-length = 120
+exclude = [".git", "__pycache__", "alembic", "manage.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "C4", "C90", "UP"]
+ignore = []
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.isort]
+known-first-party = ["."]
+
+[tool.ruff.format]
+quote-style = "double"
+skip-magic-trailing-comma = false
+
+[tool.mypy]
+exclude = [
+    "alembic",
+]
+
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# Workaround for bug in MyPy
+disallow_subclassing_any = false
+
+# enable these for even more strictness
+disallow_untyped_calls = false
+disallow_untyped_defs = true
+
+# this will enable checks even for non-annotated methods
+check_untyped_defs = true
+warn_return_any = true
+no_implicit_optional = true
+strict_optional = true
+
+# this helps when working with untyped libraries
+ignore_missing_imports = true
+
+# depends on the project
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+markers = ["integration: marks tests as integration"]
+filterwarnings = ["error"]
+cache_dir = "/tmp/.pytest_cache"
+norecursedirs = [
+    ".git",
+    "__pycache__",
+    ".mypy_cache",
+    ".ruff_cache",
+    "alembic",
+]

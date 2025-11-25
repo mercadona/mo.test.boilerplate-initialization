@@ -1,0 +1,7 @@
+_commit: v1.0.1
+_src_path: mo.boilerplate.fastapi-copier
+app_name: jabberwocky
+ci: Github
+framework: fastapi
+is_gh_cd_enabled: true
+project_name: ''

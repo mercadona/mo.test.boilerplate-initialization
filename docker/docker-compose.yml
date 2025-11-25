@@ -1,0 +1,28 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: dev
+    image: mercadona/fastapi-boilerplate:latestlocal
+    pull_policy: never
+    env_file:
+      - envfiles/local.env
+    command: sleep infinity
+    volumes:
+      - '..:/app:cached'
+    depends_on:
+      - db
+
+  db:
+    image: postgres:17-alpine
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=db
+    command: --fsync=off
+
+volumes:
+  pgdata:

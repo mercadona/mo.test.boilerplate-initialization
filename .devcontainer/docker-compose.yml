@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      # FIXME: PyCharm's devcontainers fail to build when using features
+      # in conjunction with multi-stage builds in docker-compose mode.
+      # As a workaround, resettig the value targets to the last stage.
+      target: !reset null
+    volumes:
+      - profile:/root
+      - /root/.vscode-server
+
+volumes:
+  profile:

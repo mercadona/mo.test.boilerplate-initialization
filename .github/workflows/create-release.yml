@@ -1,0 +1,14 @@
+name: Create Release
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  release:
+    uses: mercadona/github-actions/.github/workflows/create-release.yml@v1.7.0
+    with:
+      application_name: "fast-api-boilerplate"
+      dockerfile_path: 'docker/Dockerfile'
+      environment: 'laboratory'
+      docker_target: 'prod'
