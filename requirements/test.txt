@@ -1,6 +1,6 @@
 -r base.txt
 
-fastapi-cli==0.0.14
+fastapi-cli==0.0.16
 
 pytest==8.4.2
 pytest-sugar==1.1.1
